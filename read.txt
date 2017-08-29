@@ -1,0 +1,61 @@
+@extends('project.menuBar')
+@section('pageContent')
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/menuBarCss.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/buttonCss.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/paginations.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/table.css') }}">
+	<style type="text/css">
+		#cart{
+			display: none;
+		}
+		#cartDiv:hover #cart{
+display: block;
+		}
+	</style>
+</head>
+<body>
+			
+				<div>
+					<?php foreach($listProduct as $item){?>
+<div style="width: 200px;height: 400px;float: left;" >
+	<img src="{{ asset('image/'.$item->ProductImage) }}" width="100%" height="200">
+<h3>{{ $item->ProductName }}</h3>
+<h5>{{ $item->ProductPrice }}</h5>
+<form action="{{ route('muaHang') }}" method="get">
+	<input type="hidden" name="ProductId" value="{{ $item->ProductId }}">
+	<select name='soLuong'>
+		<?php for($i=1;$i<=$item->soLuongConLai;$i++){  
+		?>
+<option value="{{ $i }}">{{ $i }}</option>
+		<?php }
+		?>
+	</select>
+<input type="submit" value="Mua Hàng" class="button green">
+</form>
+</div>
+					<?php  
+				}
+					?>
+<div style="clear: both;">
+<ul class="pagination">
+	<?php for($i=1;$i<$count;$i++){ ?>
+<li >
+	<form action="{{ route('page',$i) }}" method="get" id="form{{ $i }}" style="display: none;">
+		<input type="hidden" name="index" value="{{ $i }}">
+		
+	</form>
+	<a href="#" onclick="document.getElementById('form{{ $i }}').submit();">{{ $i }}</a>
+</li>
+	<?php }?>
+	</ul>
+</div>
+
+
+				</div>
+</body>
+</html>
+@endsection
