@@ -1,4 +1,4 @@
-@extends('project.menuBar')
+﻿@extends('project.menuBar')
 @section('pageContent')
 <!DOCTYPE html>
 <html>
@@ -57,5 +57,5 @@ display: block;
 
 				</div>
 </body>
-</html>
+
 @endsection
